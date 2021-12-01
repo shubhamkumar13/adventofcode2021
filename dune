@@ -1,0 +1,3 @@
+(executable
+ (name day1)
+ (modules day1))
