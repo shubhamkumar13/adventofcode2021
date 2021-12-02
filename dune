@@ -1,3 +1,7 @@
 (executable
  (name day1)
  (modules day1))
+
+(executable
+ (name day2)
+ (modules day2))

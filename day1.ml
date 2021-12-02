@@ -30,7 +30,8 @@ let part1 () =
   List.combine lst1 lst2
   |> List.filter (fun (a, b) -> a < b)
   (* |> List.iter (fun (a, b) -> Printf.printf "(%d, %d)\n" a b) *)
-  |> List.length |> Printf.printf "%d\n"
+  |> List.length
+  |> Printf.printf "%d\n"
 
 let part2 () : unit =
   let lst3 = List.tl @@ List.tl @@ input () in
@@ -46,8 +47,9 @@ let part2 () : unit =
   List.combine lst1 lst2
   |> List.filter (fun (a, b) -> a < b)
   (* |> List.iter (fun (a, b) -> Printf.printf "(%d, %d)\n" a b) *)
-  |> List.length |> Printf.printf "%d\n"
+  |> List.length
+  |> Printf.printf "%d\n"
 
-let _ = 
+let _ =
   part1 ();
   part2 ()
