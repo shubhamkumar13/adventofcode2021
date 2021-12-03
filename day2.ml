@@ -16,13 +16,13 @@ type move = Forward of int | Down of int | Up of int
 
 type part = One | Two
 
-type pos = { h : int; v : int; aim : int}
+type pos = { h : int; v : int; aim : int }
 
 let init_pos () = { h = 0; v = 0; aim = 0 }
 
 let update_pos part pos move =
   match (part, move) with
-  | One, Forward x -> { pos with h = pos.h + x; }
+  | One, Forward x -> { pos with h = pos.h + x }
   | Two, Forward x -> { pos with h = pos.h + x; v = pos.v + (pos.aim * x) }
   | One, Down x -> { pos with v = pos.v + x }
   | Two, Down x -> { pos with aim = pos.aim + x }
@@ -41,12 +41,17 @@ let f input =
   parse_move (List.nth s 0) (List.nth s 1 |> int_of_string)
 
 let output = function
-    | One -> List.map f @@ input () |> List.fold_left (update_pos One) (init_pos ()) |> fun m ->
-  m.h * m.v |> Printf.printf "%d\n"
-    | Two -> List.map f @@ input () |> List.fold_left (update_pos Two) (init_pos ()) |> fun m ->
-  m.h * m.v |> Printf.printf "%d\n"
+  | One ->
+      List.map f @@ input () |> List.fold_left (update_pos One) (init_pos ())
+      |> fun m -> m.h * m.v |> Printf.printf "%d\n"
+  | Two ->
+      List.map f @@ input () |> List.fold_left (update_pos Two) (init_pos ())
+      |> fun m -> m.h * m.v |> Printf.printf "%d\n"
 
 let part1 () = output One
+
 let part2 () = output Two
 
-let _ = part1 (); part2 ()
+let _ =
+  part1 ();
+  part2 ()
