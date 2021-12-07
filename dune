@@ -9,3 +9,8 @@
 (executable
  (name day3)
  (modules day3))
+
+(executable
+ (name day4)
+ (modules day4)
+ (libraries str))
