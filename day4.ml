@@ -85,7 +85,6 @@ let is_col_bingo : array_element list list -> bool = fun lst -> lst |> List.tran
 
 let is_bingo : (array_element list list -> bool) -> array_element list list list -> int option = fun f lst ->
   List.map f lst |> List.mapi (fun ix x -> (ix, x)) |> 
-  (* fun lst -> List.iter (fun l -> Printf.printf "%d\n" @@ fst l) lst; lst |> *)
   List.filter (fun x -> snd x) |> fun lst -> 
     match lst with
     | [] -> None
@@ -109,5 +108,17 @@ let part1 : unit -> unit = fun () -> input () |> parse_input |> fun (input, lst)
     in
   loop None input lst |>
   List.iter (fun s -> match s with None -> Printf.printf "None " | Some s -> Printf.printf "%d " s)
+
+(* let part2 : unit -> unit = fun () -> input () |> parse_input |> fun (input, lst) ->
+  let rec loop acc input lst = match input with
+    | [] -> acc
+    | hd :: tl -> let lst = List.map (mark_bingo_matrix hd) lst in
+      let last_row_bingo_found = (List.length (List.filter is_row_bingo lst)) == (List.length lst) in
+      let last_col_bingo_found = (List.length (List.filter is_col_bingo lst)) == (List.length lst) in
+      begin
+        match last_row_bingo_found with
+        | false -> begin
+          match last_col_bingo_found with
+          | false ->  *)
 
 let _ = part1 ()
