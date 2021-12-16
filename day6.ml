@@ -11,24 +11,28 @@ let file name =
 
 let input () = try file Sys.argv.(1) with _ -> input ()
 
-let parse_input : string -> int list = fun str ->
+let parse_input : string -> int list =
+ fun str ->
   let split sep = Str.split @@ Str.regexp sep in
-  split "\n" str |> List.hd |> split "," |>
-  List.map (fun e -> int_of_string e)
+  split "\n" str |> List.hd |> split "," |> List.map (fun e -> int_of_string e)
 
 let part1 _ =
   parse_input @@ input () |> fun lst ->
-  let rec loop lst days = match days with
+  let rec loop lst days =
+    match days with
     | days when days < 1 -> lst
-    | _ -> let rec loop' acc lst = match lst with
-            | [] -> acc
-            | hd :: tl -> match hd with
-                          | 0 -> loop' (6 :: 8 :: acc) tl
-                          | _ -> loop' ((hd - 1) :: acc) tl in
-            loop (loop' [] lst) (days - 1) in
-  loop lst 80 |>
-  List.length |>
-  Printf.printf "%d\n"
+    | _ ->
+        let rec loop' acc lst =
+          match lst with
+          | [] -> acc
+          | hd :: tl -> (
+              match hd with
+              | 0 -> loop' (6 :: 8 :: acc) tl
+              | _ -> loop' ((hd - 1) :: acc) tl)
+        in
+        loop (loop' [] lst) (days - 1)
+  in
+  loop lst 80 |> List.length |> Printf.printf "%d\n"
 
 let _ = part1 ()
 
